@@ -773,6 +773,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				DEVELOPMENT_TEAM = SA6BGR8N24;
 				INFOPLIST_FILE = YYViewNetEase/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.chinasun.YYViewNetEase;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -785,6 +786,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				DEVELOPMENT_TEAM = SA6BGR8N24;
 				INFOPLIST_FILE = YYViewNetEase/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.chinasun.YYViewNetEase;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -860,6 +862,7 @@
 				9F1ED3171E34935300C18D14 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		9F1ED3181E34935300C18D14 /* Build configuration list for PBXNativeTarget "YYViewNetEaseTests" */ = {
 			isa = XCConfigurationList;
@@ -868,6 +871,7 @@
 				9F1ED31A1E34935300C18D14 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		9F1ED31B1E34935300C18D14 /* Build configuration list for PBXNativeTarget "YYViewNetEaseUITests" */ = {
 			isa = XCConfigurationList;
@@ -876,6 +880,7 @@
 				9F1ED31D1E34935300C18D14 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
