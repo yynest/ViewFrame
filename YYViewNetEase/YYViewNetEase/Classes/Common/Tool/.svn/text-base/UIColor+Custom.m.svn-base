@@ -1,0 +1,351 @@
+//
+//  UIColor+Custom.m
+//  QianShanJYDoctor
+//
+//  Created by iosdev on 2016/10/20.
+//  Copyright © 2016年 QSYJ. All rights reserved.
+//
+
+#import "UIColor+Custom.h"
+
+@implementation UIColor (QianShanJYDoctor)
+
+
+
+
+/*****************规范颜色*****************/
+/*****************
+ 名称：主色调
+ 色值：0x31c37c
+ 颜色：绿色
+ 用途：导航栏，菜单栏，按钮，选中后高亮颜色，文字颜色
+ */
++ (UIColor *)colorMainGreen {
+    return RGBACOLOR_HEX(0x31c37c, 1.0);
+}
+
+/*****************
+ 名称：按钮选中
+ 色值：0x22ab68
+ 颜色：深绿色
+ 用途：按钮点击的颜色
+ */
++ (UIColor *)colorClikcdBTGreen {
+    return RGBACOLOR_HEX(0x22ab68, 1.0);
+}
+/*
+ 名称：按钮禁用
+ 色值：0xcecece
+ 颜色：深绿色
+ 用途：按钮禁用的颜色
+ */
++ (UIColor *)colorDisableBTGrag {
+    return RGBACOLOR_HEX(0xcecece, 1.0);
+}
+
+/*****************
+ 名称：文字颜色
+ 色值：0x404040
+ 颜色：黑色
+ 用途：标题
+ */
++ (UIColor *)colorTextBlack {
+    return RGBACOLOR_HEX(0x404040, 1.0);
+}
+/*
+ 名称：文字颜色
+ 色值：0x666666
+ 颜色：灰色
+ 用途：详情
+ */
++ (UIColor *)colorTextGrag {
+    return RGBACOLOR_HEX(0x666666, 1.0);
+}
+/*
+ 名称：文字颜色
+ 色值：0x999999
+ 颜色：淡灰色
+ 用途：提示
+ */
++ (UIColor *)colorTextGragLight {
+    return RGBACOLOR_HEX(0x999999, 1.0);
+}
+
+/*****************
+ 名称：背景颜色
+ 色值：0xf5f5f5
+ 颜色：浅灰色
+ 用途：界面背景
+ */
++ (UIColor *)colorBGGragLighter {
+    return RGBACOLOR_HEX(0xf5f5f5, 1.0);
+}
++ (UIColor *)colorBGGreenLighter {
+    return RGBACOLOR_HEX(0xedf5f0, 1.0);
+}
+/*
+ 名称：透明的背景颜色
+ 色值：0xffffff
+ 颜色：透明色
+ 用途：弱提醒-0.7，IM-0.5
+ */
++ (UIColor *)colorBGWithAlpha:(CGFloat)alpha {
+    return RGBACOLOR_HEX(0x000000, alpha);
+}
+
+/*****************
+ 名称：强调色
+ 色值：0xfdad1c
+ 颜色：黄色
+ 用途：强调
+ */
++ (UIColor *)colorHighlightYellow {
+    return RGBACOLOR_HEX(0xfdad1c, 1.0);
+}
+/*
+ 名称：强调色
+ 色值：0xf15252
+ 颜色：红色
+ 用途：强调
+ */
++ (UIColor *)colorHighlightRed {
+    return RGBACOLOR_HEX(0xf15252, 1.0);
+}
+
+/*****************
+ 名称：边框
+ 色值：0xd1d1d1
+ 颜色：浅浅灰色
+ 用途：分割线
+ */
++ (UIColor *)colorBorderGargLighter {
+    return RGBACOLOR_HEX(0xd1d1d1, 1.0);
+}
++ (UIColor *)colorBorderGargLighterWithAlpha:(CGFloat)alpha {
+    return RGBACOLOR_HEX(0xd1d1d1, alpha);
+}
+
+/*****************规范颜色*****************/
+
+
+//由一个颜色生成图片
++ (UIImage *)imageWithColor:(UIColor *)color size:(CGSize)size {
+    CGRect rect = CGRectMake(0, 0, size.width, size.height);
+    UIGraphicsBeginImageContext(rect.size);
+    CGContextRef context = UIGraphicsGetCurrentContext();
+    CGContextSetFillColorWithColor(context, [color CGColor]);
+    CGContextFillRect(context, rect);
+    UIImage *image = UIGraphicsGetImageFromCurrentImageContext();
+    UIGraphicsEndImageContext();
+    
+    return image;
+}
+
+static void addRoundedRectToPath(CGContextRef context, CGRect rect, float ovalWidth,
+                                 float ovalHeight)
+{
+    float fw, fh;
+    
+    if (ovalWidth == 0 || ovalHeight == 0)
+    {
+        CGContextAddRect(context, rect);
+        return;
+    }
+    
+    CGContextSaveGState(context);
+    CGContextTranslateCTM(context, CGRectGetMinX(rect), CGRectGetMinY(rect));
+    CGContextScaleCTM(context, ovalWidth, ovalHeight);
+    fw = CGRectGetWidth(rect) / ovalWidth;
+    fh = CGRectGetHeight(rect) / ovalHeight;
+    
+    CGContextMoveToPoint(context, fw, fh/2);  // Start at lower right corner
+    CGContextAddArcToPoint(context, fw, fh, fw/2, fh, 1);  // Top right corner
+    CGContextAddArcToPoint(context, 0, fh, 0, fh/2, 1); // Top left corner
+    CGContextAddArcToPoint(context, 0, 0, fw/2, 0, 1); // Lower left corner
+    CGContextAddArcToPoint(context, fw, 0, fw, fh/2, 1); // Back to lower right
+    
+    CGContextClosePath(context);
+    CGContextRestoreGState(context);
+}
+
++ (id)createRoundedRectImage:(UIImage*)image size:(CGSize)size radius:(NSInteger)r
+{
+    // the size of CGContextRef
+    int w = size.width;
+    int h = size.height;
+    
+    UIImage *img = image;
+    CGColorSpaceRef colorSpace = CGColorSpaceCreateDeviceRGB();
+    CGContextRef context = CGBitmapContextCreate(NULL, w, h, 8, 4 * w, colorSpace, kCGImageAlphaPremultipliedFirst);
+    CGRect rect = CGRectMake(0, 0, w, h);
+    
+    CGContextBeginPath(context);
+    addRoundedRectToPath(context, rect, r, r);
+    CGContextClosePath(context);
+    CGContextClip(context);
+    CGContextDrawImage(context, CGRectMake(0, 0, w, h), img.CGImage);
+    CGImageRef imageMasked = CGBitmapContextCreateImage(context);
+    img = [UIImage imageWithCGImage:imageMasked];
+    
+    CGContextRelease(context);
+    CGColorSpaceRelease(colorSpace);
+    CGImageRelease(imageMasked);
+    
+    return img;
+}
+
+//蓝色
++ (UIColor *)colorBlueDark{
+    return RGBACOLOR_HEX(0x1793a7, 1.0);
+}
++ (UIColor *)colorBlue{
+    return RGBACOLOR_HEX(0x1badc4, 1.0);
+}
+
++ (UIColor *)colorBorderGragLight{  //淡灰色(0xdadada), 用于：表格tableview 分隔线统一颜色
+    return RGBACOLOR_HEX(0xdadada, 1.0);
+}
+
+
+#pragma mark - 图表控件中，不同血压或心率等级对应的颜色级别
+
++ (UIColor *)colorWithHighBloodPressureValue:(NSInteger)highValue lowBloodPressureValue:(NSInteger)lowValue
+{
+    UIColor *retColor = nil;
+    BloodPressureLevel level = [ToolBox getBloodPressureLevelWithSBP:highValue andDBP:lowValue];
+    if (level == BloodPressureLevel_Low) {
+        retColor = [UIColor subnormalBpColor];
+    }
+    else if (level == BloodPressureLevel_Normal) {
+        retColor = [UIColor normalBpColor];
+    }
+    else if (level == BloodPressureLevel_HighNormal) {
+        retColor = [UIColor highNormalBpColor];
+    }
+    else if (level == BloodPressureLevel_Mild) {
+        retColor = [UIColor levelOneHighBpColor];
+    }
+    else if (level == BloodPressureLevel_Moderate) {
+        retColor = [UIColor levelTwoHighBpColor];
+    }
+    else if (level == BloodPressureLevel_Severe) {
+        retColor = [UIColor levelThreeHighBpColor];
+    }
+    
+    return retColor;
+}
+
++ (UIColor *)colorWithHeartRateValue:(NSInteger)value
+{
+    UIColor *retColor = nil;
+    if (value < 60) {           // 心动过缓
+        retColor = [UIColor highNormalBpColor];
+    }
+    else if (value >= 60 && value <= 100) {     // 正常
+        retColor = [UIColor normalBpColor];
+    }
+    else {              // 心动过速
+        retColor = [UIColor levelTwoHighBpColor];
+    }
+    
+    return retColor;
+}
+
++ (UIColor *)subnormalBpColor
+{
+    return [UIColor colorWithRed:70.0 / 255.0f green:219.0 / 255.0f blue:210.0 / 255.0f alpha:1.0f];
+}
+
++ (UIColor *)normalBpColor
+{
+    return [UIColor colorWithRed:146.0 / 255.0f green:226.0 / 255.0f blue:27.0 / 255.0f alpha:1.0f];
+}
+
++ (UIColor *)highNormalBpColor
+{
+    return [UIColor colorWithRed:255.0 / 255.0f green:187.0 / 255.0f blue:81.0 / 255.0f alpha:1.0f];
+}
+
++ (UIColor *)levelOneHighBpColor
+{
+    return [UIColor colorWithRed:249.0 / 255.0f green:131.0 / 255.0f blue:131.0 / 255.0f alpha:1.0f];
+}
+
++ (UIColor *)levelTwoHighBpColor
+{
+    return [UIColor colorWithRed:246.0 / 255.0f green:104.0 / 255.0f blue:104.0 / 255.0f alpha:1.0f];
+}
+
++ (UIColor *)levelThreeHighBpColor
+{
+    return [UIColor colorWithRed:238.0 / 255.0f green:81.0 / 255.0f blue:71.0 / 255.0f alpha:1.0f];
+}
+
++ (UIColor *)colorForBezierCurveLineInJIMLineChartView
+{
+    return RGBACOLOR_HEX(0xB9DAE2, 1.0f);
+}
+
++ (UIColor *)DetailPageSBPBack
+{
+    return RGBACOLOR_HEX(0xF9FDFE, 1.0f);
+}
+
++ (UIColor *)DetailPageDBPBack
+{
+    return RGBACOLOR_HEX(0xF3FCFE, 1.0f);
+}
+
++ (UIColor *)DetailPagesheetSpLine       //详情页表格分隔线
+{
+    return RGBACOLOR_HEX(0xdadada, 0.5);
+    
+}
+
++ (UIColor *)MyBloodBackColor //分析页面的背景色
+{
+    return RGBACOLOR_HEX(0x1598ad, 1.0);
+}
++ (UIColor *)MyBloodBackSelectColor //分析页面的背景色选中色
+{
+    return RGBACOLOR_HEX(0x128599, 1.0);
+}
++ (UIColor *)MyBloodspLineColor //分析页面sheet分隔线颜色
+{
+    return RGBACOLOR_HEX(0x51dcf2, 1.0);
+}
+
++ (UIColor *)MyBloodLargeColor //偏大
+{
+    return RGBACOLOR_HEX(0xe24a40, 1.0);
+}
++ (UIColor *)MyBloodSmallColor //偏小
+{
+    return RGBACOLOR_HEX(0xffbb51, 1.0);
+}
++ (UIColor *)MyBloodNatureColor//正常
+{
+    return RGBACOLOR_HEX(0x57b946, 1.0);
+}
+
+
++ (UIColor *)MedRemindColor//用药提醒，淡蓝色
+{
+    return RGBACOLOR_HEX(0x7bcbd6, 1.0);
+}
+
++ (UIColor *)color1D9EB7
+{
+    return RGBACOLOR_HEX(0x1d9eb7, 1.0);
+}
+
++ (UIColor *)halfAlphaColor
+{
+    return [UIColor colorWithRed:0/255.0 green:0/255.0 blue:0/255.0 alpha:0.5];
+}
+
+//背景颜色
++ (UIColor *)colorBGBlueLight{//浅蓝:0xa7dce4
+    return RGBACOLOR_HEX(0xa7dce4, 1.0);
+}
+@end

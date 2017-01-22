@@ -1,0 +1,30 @@
+{
+  "DVTSourceControlWorkspaceBlueprintPrimaryRemoteRepositoryKey" : "3AB826B7F9B44F4A7C59ED1358ACA808CAF5DABC",
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyRepositoryLocationsKey" : {
+
+  },
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyStatesKey" : {
+    "3AB826B7F9B44F4A7C59ED1358ACA808CAF5DABC" : 9223372036854775807,
+    "9169C3CC5117A77072ADAF6ED275E907D155A121" : 9223372036854775807
+  },
+  "DVTSourceControlWorkspaceBlueprintIdentifierKey" : "967687B9-DDD4-43D8-8C02-C816E3015625",
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyPathsKey" : {
+    "3AB826B7F9B44F4A7C59ED1358ACA808CAF5DABC" : "ViewFrame\/",
+    "9169C3CC5117A77072ADAF6ED275E907D155A121" : ""
+  },
+  "DVTSourceControlWorkspaceBlueprintNameKey" : "YYViewNetEase",
+  "DVTSourceControlWorkspaceBlueprintVersion" : 204,
+  "DVTSourceControlWorkspaceBlueprintRelativePathToProjectKey" : "YYViewNetEase\/YYViewNetEase.xcodeproj",
+  "DVTSourceControlWorkspaceBlueprintRemoteRepositoriesKey" : [
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/github.com\/yynest\/ViewFrame.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "3AB826B7F9B44F4A7C59ED1358ACA808CAF5DABC"
+    },
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/github.com\/yynest\/Test.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "9169C3CC5117A77072ADAF6ED275E907D155A121"
+    }
+  ]
+}

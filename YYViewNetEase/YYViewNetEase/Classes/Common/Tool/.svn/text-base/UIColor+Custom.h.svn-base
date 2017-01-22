@@ -1,0 +1,157 @@
+//
+//  UIColor+Custom.h
+//  QianShanJYDoctor
+//
+//  Created by iosdev on 2016/10/20.
+//  Copyright © 2016年 QSYJ. All rights reserved.
+//
+
+#import <Foundation/Foundation.h>
+
+//十六进制颜色数值转换为UIColor
+#define RGBACOLOR_HEX(rgbValue, alphaValue) \
+[UIColor \
+colorWithRed:((float)((rgbValue & 0xFF0000) >> 16))/255.0 \
+green:((float)((rgbValue & 0x00FF00) >> 8))/255.0 \
+blue:((float)(rgbValue & 0x0000FF))/255.0 \
+alpha:alphaValue]
+
+@interface UIColor (QianShanJYDoctor)
+
+/*****************规范颜色*****************/
+/******************
+ 名称：主色调
+ 色值：0x31c37c
+ 颜色：绿色
+ 用途：导航栏，菜单栏，按钮，选中后高亮颜色，文字颜色
+ */
++ (UIColor *)colorMainGreen;
+
+/******************
+ 名称：按钮选中
+ 色值：0x22ab68
+ 颜色：深绿色
+ 用途：按钮点击的颜色
+ */
++ (UIColor *)colorClikcdBTGreen;
+/*
+ 名称：按钮禁用
+ 色值：0xcecece
+ 颜色：深绿色
+ 用途：按钮禁用的颜色
+ */
++ (UIColor *)colorDisableBTGrag;
+
+
+/******************
+ 名称：文字颜色
+ 色值：0x404040
+ 颜色：黑色
+ 用途：标题
+ */
++ (UIColor *)colorTextBlack;
+/*
+ 名称：文字颜色
+ 色值：0x666666
+ 颜色：灰色
+ 用途：详情
+ */
++ (UIColor *)colorTextGrag;
+/*
+ 名称：文字颜色
+ 色值：0x999999
+ 颜色：淡灰色
+ 用途：提示
+ */
++ (UIColor *)colorTextGragLight;
+
+/******************
+ 名称：背景颜色
+ 色值：0xf5f5f5,0xedf5f0
+ 颜色：浅灰色,浅绿色
+ 用途：界面背景
+ */
++ (UIColor *)colorBGGragLighter;
++ (UIColor *)colorBGGreenLighter;
+/*
+ 名称：透明的背景颜色
+ 色值：0xffffff
+ 颜色：透明色
+ 用途：弱提醒-0.7，IM-0.5
+ */
++ (UIColor *)colorBGWithAlpha:(CGFloat)alpha;
+
+/******************
+ 名称：强调色
+ 色值：0xfdad1c
+ 颜色：黄色
+ 用途：强调
+ */
++ (UIColor *)colorHighlightYellow;
+/*
+ 名称：强调色
+ 色值：0xf15252
+ 颜色：红色
+ 用途：强调
+ */
++ (UIColor *)colorHighlightRed;
+
+/******************
+ 名称：边框
+ 色值：0xd1d1d1
+ 颜色：浅浅灰色
+ 用途：分割线
+ */
++ (UIColor *)colorBorderGargLighter;
++ (UIColor *)colorBorderGargLighterWithAlpha:(CGFloat)alpha;
+
+/*****************规范颜色*****************/
+
+//由一个颜色生成图片,
++ (UIImage *)imageWithColor:(UIColor *)color size:(CGSize)size;
+//图片变圆角
++ (id)createRoundedRectImage:(UIImage*)image size:(CGSize)size radius:(NSInteger)r;
+
+
+
++ (UIColor *)colorBlueDark;
++ (UIColor *)colorBlue;
++ (UIColor *)colorBorderGragLight;
+
+// 图表控件中，不同血压等级对应的颜色级别
+//+ (UIColor *)colorWithHighBloodPressureValue:(NSInteger)value;  // 根据收缩压血压值的不同，返回的颜色也不同
++ (UIColor *)colorWithHighBloodPressureValue:(NSInteger)highValue lowBloodPressureValue:(NSInteger)lowValue;      // 根据收缩压和舒张压血压值的不同，返回的颜色也不同
+
++ (UIColor *)colorWithHeartRateValue:(NSInteger)value;          // 根据心率值的不同，返回的颜色也不同
++ (UIColor *)subnormalBpColor;      // x < 90               偏低血压
++ (UIColor *)normalBpColor;         // 90 <= x < 120        正常血压
++ (UIColor *)highNormalBpColor;     // 120 <= x < 140       正常高值
++ (UIColor *)levelOneHighBpColor;   // 140 <= x < 160       一级高血压
++ (UIColor *)levelTwoHighBpColor;   // 160 <= x < 180       二级高血压
++ (UIColor *)levelThreeHighBpColor; // x >= 180             三级高血压
+
+//血压图表详情页 背景及线的颜色
++ (UIColor *)colorForBezierCurveLineInJIMLineChartView;     // 血压详情及心率详情中光滑曲线的颜色
++ (UIColor *)DetailPageSBPBack;      //详情页高压及心率背景颜色
++ (UIColor *)DetailPageDBPBack;       //详情页低压背景颜色
++ (UIColor *)DetailPagesheetSpLine;
+
+//录入血压分析页面  颜色值
+
++ (UIColor *)MyBloodBackColor; //分析页面的背景色
++ (UIColor *)MyBloodBackSelectColor; //分析页面的背景色选中色
++ (UIColor *)MyBloodspLineColor; //分析页面sheet分隔线颜色
+
++ (UIColor *)MyBloodLargeColor; //偏大
++ (UIColor *)MyBloodSmallColor; //偏小
++ (UIColor *)MyBloodNatureColor; //正常
+
+//用药提醒界面 颜色值
++ (UIColor *)MedRemindColor;//用药提醒，淡蓝色
+
++ (UIColor *)color1D9EB7;
+//半透明
++ (UIColor *)halfAlphaColor;
++ (UIColor *)colorBGBlueLight;
+
+@end
